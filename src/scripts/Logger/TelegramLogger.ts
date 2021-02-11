@@ -4,14 +4,12 @@ const fetch = require('node-fetch');
 
 export class TelegramLogger implements Logger {
 
-
    private logGen: LogGenerator;
 
    constructor(logGen: LogGenerator) {
       this.logGen = logGen;
    }
 
-   //todo
    log(): void {
       fetch(this.genUrl(), {
          method: 'GET'

@@ -56,7 +56,6 @@ async function processMenu(menu: Array<Meal>) {
       }
    }
 
-
    const TgLogger = new TelegramLogger(logGen);
    TgLogger.log();
 
@@ -72,8 +71,5 @@ async function getHtmlFromBrowser(): Promise<string> {
    return await element.getAttribute("innerHTML");
 }
 
-function readFromTestingFile(): string {
-   return fs.readFileSync('testHtml.txt', 'utf8');
-}
 
 

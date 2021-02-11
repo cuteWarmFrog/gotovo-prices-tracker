@@ -5,9 +5,6 @@ const db = require('./database');
 
 export class MenuDAO {
 
-   constructor() {
-   }
-
    async  checkIfMealExists(meal: Meal) {
       const result: QueryResult = await db.query(
          `SELECT *
@@ -29,8 +26,6 @@ export class MenuDAO {
    }
 
    async getMealMaxPrice(meal: Meal) {
-      //const result: QueryResult = await db.query(
-      // `SELECT MAX(price) from meals WHERE name=$1`, [meal.name]);
 
       const result: QueryResult = await db.query(
          `select price from meals where name=$1 and id=(SELECT MAX(id) from meals WHERE name=$1)`, [meal.name]);

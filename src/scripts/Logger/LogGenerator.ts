@@ -1,5 +1,4 @@
 import {Meal} from "../Meal";
-const moment = require('moment');
 
 export class LogGenerator {
    mealsPriceChanged: mealWithDelta[] = [];
@@ -35,14 +34,12 @@ export class LogGenerator {
       if(this.mealsPriceChanged.length > 0) {
          isMealsPriceChanged = `Изменившиеся цены:\n`;
          this.mealsPriceChanged.map((meal: mealWithDelta) => {
-            isMealsPriceChanged = isMealsPriceChanged.concat(this.getMealText(meal));
+            isMealsPriceChanged = isMealsPriceChanged.concat(LogGenerator.getMealText(meal));
          })
       } else {
          isMealsPriceChanged = `Ни одно блюдо не подорожало.\n`
       }
-      const text =
-         `${date}\n\n${isMealsPriceChanged}\n${this.getNewMealsText()}`;
-      return text;
+      return `${date}\n\n${isMealsPriceChanged}\n${this.getNewMealsText()}`;
    }
 
    private getNewMealsText() {
@@ -76,7 +73,7 @@ export class LogGenerator {
 
    }
 
-   private riseOrFall(delta: number): string {
+   private static riseOrFall(delta: number): string {
       return delta > 0 ? 'подорожало' : 'подешевело';
    }
 
@@ -85,8 +82,8 @@ export class LogGenerator {
       //return moment().locale('RU').format('LL');
    }
 
-   private getMealText(meal: mealWithDelta) {
-      return `Блюдо "${meal.meal.name}" ${this.riseOrFall(meal.delta)} на ${Math.abs(meal.delta)}₽ и теперь стоит ${meal.meal.price}₽\n`
+   private static getMealText(meal: mealWithDelta) {
+      return `Блюдо "${meal.meal.name}" ${LogGenerator.riseOrFall(meal.delta)} на ${Math.abs(meal.delta)}₽ и теперь стоит ${meal.meal.price}₽\n`
    }
 }
 
